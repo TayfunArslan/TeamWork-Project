@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fb2a2b3fc34e442fac69cc6430373070" Name="Diagram1">
+        <EntityTypeShape EntityType="TeamWorkModel.Project" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="TeamWorkModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TeamWorkModel.Task" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TeamWorkModel.TaskHistory" Width="1.5" PointX="7.5" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TeamWorkModel.TaskStatus" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TeamWorkModel.User" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TeamWorkModel.UserType" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <AssociationConnector Association="TeamWorkModel.FK_Task_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="TeamWorkModel.FK_Task_TaskStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="TeamWorkModel.FK_Task_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TeamWorkModel.FK_TaskHistory_Task" ManuallyRouted="false" />
+        <AssociationConnector Association="TeamWorkModel.FK_TaskHistory_User" ManuallyRouted="false" />
+        <AssociationConnector Association="TeamWorkModel.FK_User_UserType" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

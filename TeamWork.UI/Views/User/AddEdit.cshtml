@@ -1,0 +1,113 @@
+﻿@model TeamWork.Service.Dto.UserDto
+@{
+    ViewBag.Title = "AddEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        Kullanıcı Ekle/Güncelle
+        <small>Kullanıcı ekleme güncelleme işlemlerini bu sayfada yapabilirsiniz.</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+    </ol>
+</section>
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div style="float:left; width:150px;">
+                        <a href=@Url.Action("Index", "User") class="btn btn-block btn-primary btn-flat">Listeye Dön</a>
+                    </div>
+                    <div style="float:left; width:150px; margin-left:5px;">
+                        <a href=@Url.Action("AddEdit", "User") class="btn btn-block btn-success btn-flat">Yeni Ekle</a>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <div class="col-md-12">
+                        <div class="box box-info">
+                            <br />
+                            <form id="formEdit" action="AddEdit" method="post" class="form-horizontal">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Id</label>
+                                        <div class="col-sm-4">
+                                            @Html.TextBoxFor(p => p.Id, new { @class = "form-control", @readonly = "true" })
+                                        </div>
+
+                                        <label for="UserTypeId" class="col-sm-2 control-label">Kullanıcı Tipi</label>
+                                        <div class="col-sm-4">
+                                            @Html.DropDownListFor(p => p.UserTypeId, new SelectList(Model.UserTypes, "Id", "Name"), "Proje Seçiniz..", new { @class = "form-control", @placeholder = "Proje Seçiniz.." })
+                                            @Html.ValidationMessageFor(p => p.UserTypeId)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">İsim Soyisim</label>
+                                        <div class="col-sm-4">
+                                            @Html.TextBoxFor(p => p.NameSurname, new { @class = "form-control", @placeholder = "Giriniz.." })
+                                        </div>
+
+                                        <label class="col-sm-2 control-label">Kullanıcı Adı</label>
+                                        <div class="col-sm-4">
+                                            @Html.TextBoxFor(p => p.Username, new { @class = "form-control", placeholder = "Giriniz.." })
+                                            @Html.ValidationMessageFor(p => p.Username)
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Şifre</label>
+                                        <div class="col-sm-4">
+                                            @Html.PasswordFor(p => p.Password, new { @class = "form-control", @placeholder = "Giriniz.." })
+                                        </div>
+
+                                        <label class="col-sm-2 control-label">Email</label>
+                                        <div class="col-sm-4">
+                                            @Html.TextBoxFor(p => p.Email, new { @class = "form-control", placeholder = "Giriniz.." })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Telefon</label>
+                                        <div class="col-sm-4">
+                                            @Html.TextBoxFor(p => p.Phone, new { @class = "form-control", @placeholder = "Giriniz.." })
+                                        </div>
+
+                                        <label class="col-sm-2 control-label">Adres</label>
+                                        <div class="col-sm-4">
+                                            @Html.TextAreaFor(p => p.Adress, new { @class = "form-control", placeholder = "Giriniz.." })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Açıklama</label>
+                                        <div class="col-sm-4">
+                                            @Html.TextAreaFor(p => p.Description, new { @class = "form-control", @placeholder = "Giriniz.." })
+                                        </div>
+
+                                        <label class="col-sm-2 control-label">Aktif Mi</label>
+                                        <div class="col-sm-4">
+                                            @Html.CheckBoxFor(p => p.IsActive)
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="box-footer">
+                                    <div style="float: right; width:150px;">
+                                        <button id="saveButton" type="submit" class="btn btn-block btn-info btn-flat">Kaydet</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

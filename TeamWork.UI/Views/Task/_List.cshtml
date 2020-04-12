@@ -1,0 +1,78 @@
+﻿@model TeamWork.UI.Models.TaskListModel
+
+<div class="box">
+    <div class="box-header">
+        <div style="float:left; width:150px; margin-left:5px;">
+            <a href=@Url.Action("AddEdit", "Task") class="btn btn-block btn-success btn-flat">Yeni Ekle</a>
+        </div>
+    </div>
+
+    <div class="box-body">
+        @if (Model.Tasks.Count > 0)
+        {
+            <table id="grdList" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Id</th>
+                        <th>Proje Adı</th>
+                        <th>Başlık</th>
+                        <th>Statü</th>
+                        <th>Assign To</th>
+                        <th>Baş. Tar.</th>
+                        <th>Bit. Tar.</th>
+                        <th>Süre</th>
+                        <th>Tamamlanan</th>
+                        <th>Kalan</th>
+                        <th>Aktif Mi</th>
+                        <th>Ol. Tar.</th>
+                        <th>Gün. Tar.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var task in Model.Tasks)
+                    {
+                        <tr>
+                            <td><a href=@Url.Action("AddEdit", "Task", new { id = task.Id })>Güncelle</a></td>
+                            <th>@task.Id</th>
+                            <td>@task.Project.Name</td>
+                            <td>@task.Title</td>
+                            <td>@task.TaskStatus.Name</td>
+                            <td>@task.User.NameSurname</td>
+                            <td>@task.StartDate</td>
+                            <td>@task.EndDate</td>
+                            <td>@task.Estimated</td>
+                            <td>@task.Completed</td>
+                            <td>@task.Remaining</td>
+                            <td>@task.IsActive</td>
+                            <td>@task.CreatedDate</td>
+                            <td>@task.UpdatedDate</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th>Id</th>
+                        <th>Proje Adı</th>
+                        <th>Başlık</th>
+                        <th>Statü</th>
+                        <th>Baş. Tar.</th>
+                        <th>Bit. Tar.</th>
+                        <th>Süre</th>
+                        <th>Tamamlanan</th>
+                        <th>Kalan</th>
+                        <th>Aktif Mi</th>
+                        <th>Ol. Tar.</th>
+                        <th>Gün. Tar.</th>
+                    </tr>
+                </tfoot>
+            </table>
+
+        }
+        else
+        {
+            <p>Hiç kayıt bulunamadı...</p>
+        }
+    </div>
+</div>

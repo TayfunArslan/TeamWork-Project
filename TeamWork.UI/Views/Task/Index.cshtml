@@ -1,0 +1,108 @@
+﻿@model TeamWork.UI.Models.TaskListModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        İşler
+        <small>Sistemdeki bütün işleri bu sayfa üzerinden yönetebilirsiniz.</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+    </ol>
+</section>
+
+
+<section class="content">
+
+
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Arama</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        @*<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>*@
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <form id="formSearch" action="Search" method="get" class="form-horizontal">
+                            <div class="col-xs-3">
+                                @Html.DropDownListFor(p => p.ProjectId, new SelectList(Model.Projects, "Id", "Name"), "Proje Seçiniz..", new { @class = "form-control", @placeholder = "Proje Seçiniz.." })
+                            </div>
+                            <div class="col-xs-3">
+                                @Html.DropDownListFor(p => p.TaskStatusId, new SelectList(Model.TasStatuses, "Id", "Name"), "Statü Seçiniz..", new { @class = "form-control", @placeholder = "Statü Seçiniz.." })
+                            </div>
+                            <div class="col-xs-3">
+                                @Html.DropDownListFor(p => p.UserId, new SelectList(Model.Users, "Id", "NameSurname"), "Kullanıcı Seçiniz..", new { @class = "form-control", @placeholder = "Kullanıcı Seçiniz.." })
+                            </div>
+                            <div class="col-xs-3">
+                                <button id="btnSearch" type="button" class="btn btn-block btn-primary btn-flat">Ara</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+            <div id="divList">
+                @Html.Partial("_List", Model)
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(function () {
+        $('#grdList').DataTable({
+            'paging': true,
+            'lengthChange': true,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+        })
+
+        $("#btnSearch").click(function (e) {
+
+            var frm = $('#formSearch').serialize();
+            var divList = $('#divList');
+            var $this = $(this);
+            e.preventDefault();
+            $form = $('#formSearch');
+            $.ajax({
+                type: 'post',
+                url: '@Url.Action("Search")',
+                data: frm,
+                beforeSend: function () {
+                    $this.attr("disabled", "disabled");
+                },
+                complete: function () {
+                    $this.removeAttr("disabled");
+                },
+                success: function (result) {
+                    divList.html(result);
+                    @*if (result.status === true) {
+                        $("#modal-success-body-content").text(result.message);
+                        $('#modal-success').modal('show');
+                        window.location = '@(Url.Action("Index", "AdminEducation"))';
+                    }
+                    else {
+                        $("#modal-danger-body-content").text(result.message);
+                        $('#modal-danger').modal('show');
+                    }*@
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //$("#modal-danger-body-content").text(result.message);
+                    //$('#modal-danger').modal('show');
+                }
+            });
+        });
+    })
+</script>
